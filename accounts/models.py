@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.utils.translation import gettext_lazy as _
-
+from .managers import UsersManager
 
 
 class Users(AbstractBaseUser):
@@ -12,6 +12,7 @@ class Users(AbstractBaseUser):
     is_staff = models.BooleanField(_('staff status'), default=False)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     
+    objects = UsersManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ('mobile_phone', 'full_name')
     
