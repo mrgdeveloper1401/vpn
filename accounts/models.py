@@ -11,13 +11,15 @@ class Users(AbstractBaseUser):
     is_active = models.BooleanField(_('active'), default=True)
     is_staff = models.BooleanField(_('staff status'), default=False)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
+    is_superuser = models.BooleanField(_('superuser status'), default=False)
     
     objects = UsersManager()
+    EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ('mobile_phone', 'full_name')
     
     def __str__(self) -> str:
-        return f'{self.full_name} -- {self.email}'
+        return self.email
     
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
